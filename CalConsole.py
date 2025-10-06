@@ -126,14 +126,14 @@ def main():
 
     def api_get_input():
         return {
-            "left": keys[pygame.K_LEFT],
-            "right": keys[pygame.K_RIGHT],
-            "up": keys[pygame.K_UP],
-            "down": keys[pygame.K_DOWN],
-            "a": keys[pygame.K_a],
-            "b": keys[pygame.K_b],
-            "start": keysp[pygame.K_RETURN],
-            "select": keysp[pygame.K_TAB]
+            "left": keys[pygame.K_a],
+            "right": keys[pygame.K_d],
+            "up": keys[pygame.K_w],
+            "down": keys[pygame.K_s],
+            "a": keys[pygame.K_z],
+            "b": keys[pygame.K_x],
+            "start": keys[pygame.K_RETURN],
+            "select": keys[pygame.K_TAB]
         }
     def api_exit():
         global QUIT_REQUESTED
