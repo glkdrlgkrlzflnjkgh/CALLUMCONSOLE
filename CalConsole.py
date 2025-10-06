@@ -12,14 +12,26 @@ from RestrictedPython import safe_globals
 from RestrictedPython.Guards import safe_builtins
 
 import threading
-
+# Cartridge compile-time consts
+ALLOW_THREADING = False
 class SafeThread: # A custom wrapper for threading, for sandboxing reasons.
     def __init__(self, target):
         self.thread = threading.Thread(target=target)
     def start(self):
-        self.thread.start()
+        try:
+            global ALLOW_THREADING
+            if not ALLOW_THREADING:
+                raise RuntimeError("Threading is not allowed in this cartridge. (did you enable threading API with '# $ threading: true'?)")
+            self.thread.start()
+        except Exception as e:
+            print("Threading error:", e)
+            
+
     def join(self):
-        self.thread.join()
+        try:
+            self.thread.join()
+        except Exception as e:
+            print("Threading error:", e)
 
 
 
@@ -98,17 +110,25 @@ def extract_metadata(code):
     metadata = {}
     for line in code.splitlines():
         if line.strip().startswith("# $"):
-            try:
-                tag, value = line[3:].split(":", 1)
-                metadata[tag.strip()] = value.strip()
-            except ValueError:
-                continue
+            parts = line[3:].split(":", 1)
+            if len(parts) == 2:
+                tag, value = parts
+                metadata[tag.strip().lower()] = value.strip()
+            else:
+                print(f"[META WARNING] Malformed metadata line: {line}")
     return metadata
 def load_cart(filename, api):
     with open(filename, "r") as f:
         code = f.read()
-        for meta in extract_metadata(code):
-            print(f"[CART META DATA]  - {meta}: {extract_metadata(code)[meta]}")
+
+        for tag, value in extract_metadata(code).items():
+            if tag == "audio" and value.strip().lower() == "true":
+                print("!WARNING! this cartridge seems like it is going to use the audio APIs, if you are sensitive to certain audio cues, make sure that you have thoroughly reviewed the source code of the cartridge, or looked online to see what other people have said about it!")
+            print(f"[CART META DATA] {tag}: {value} ")
+            if tag == "threading" and value.strip().lower() == "true":
+                print("!WARNING! the cartridge has enabled the threading API, the threading API is experimental!")
+                global ALLOW_THREADING
+                ALLOW_THREADING = True
     try:
         compiled = compile_restricted(code, filename=filename, mode='exec')
     except SyntaxError as e:

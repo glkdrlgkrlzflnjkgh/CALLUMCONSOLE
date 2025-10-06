@@ -1,10 +1,23 @@
-$
+# $ title: FreeMove Example
+# $ author: glkdrlgkrlzflnjkgh
+# $ version: 1.1
+# $ description: Move a sprite with WASD. Press F to exit. One-time threaded print.
+# $ audio: true
+# $ threading: true
+
 player = {"x": 60, "y": 60, "speed": 1}
+thread_started = False
+
+def threaded_message():
+    print("🧵 Thread says: Hello from the background!")
 
 def setup():
     print("Use WASD keys to move the sprite around the screen.")
-    global player
-    # Already initialized above
+    global thread_started
+    if not thread_started:
+        thread = Thread(threaded_message)
+        thread.start()
+        thread_started = True
 
 def update():
     global player
