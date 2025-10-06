@@ -54,9 +54,10 @@ def update():
 ## 🛡️ Safety First
 
 - Uses `RestrictedPython` to sandbox cartridge code  
-- Only whitelisted modules (`math`, `random`) are exposed  
+- Only whitelisted modules (`math`, `random`) are exposed
 - Custom guards for safe iteration and dictionary access  
 - No access to `os`, `sys`, or dangerous built-ins
+- also, `RestrictedPython` is used aswell to prevent curcumvention of the fantasy console's limitations imposed by its specs. 
 
 ---
 
