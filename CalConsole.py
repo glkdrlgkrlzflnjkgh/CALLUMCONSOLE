@@ -131,7 +131,9 @@ def main():
             "up": keys[pygame.K_UP],
             "down": keys[pygame.K_DOWN],
             "a": keys[pygame.K_a],
-            "b": keys[pygame.K_b]
+            "b": keys[pygame.K_b],
+            "start": keysp[pygame.K_RETURN],
+            "select": keysp[pygame.K_TAB]
         }
     def api_exit():
         global QUIT_REQUESTED
