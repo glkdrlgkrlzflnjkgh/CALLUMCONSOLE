@@ -21,7 +21,7 @@ Designed and maintained by [glkdrlgkrlzflnjkgh](https://github.com/glkdrlgkrlzfl
 
 ---
 
-## 📘 API Highlights (Implemented)
+## 📘 APIs
 
 Cartridges can use these built-in functions:
 
