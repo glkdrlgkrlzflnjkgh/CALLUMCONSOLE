@@ -29,7 +29,7 @@ Cartridges can use these built-in functions:
 |-----|-------------|
 | `draw_sprite(x, y)` | Draws the default 8×8 sprite at `(x, y)` |
 | `draw_custom_sprite(sprite, x, y)` | Renders a user-defined sprite (up to 16×16) |
-| `get_input()` | Returns a dictionary of key states: `left`, `right`, `up`, `down`, `a`, `b` |
+| `get_input()` | Returns a dictionary of key states: `left`, `right`, `up`, `down`, `a`, `b`, `start`, `select` |
 | `quit()` | Gracefully exits the cartridge |
 | `Thread(target)` | Runs a function in a background thread (sandboxed) |
 | `print()` | Captured and displayed as `[CART OUTPUT]` in the console |
