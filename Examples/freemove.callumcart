@@ -1,7 +1,7 @@
 player = {"x": 60, "y": 60, "speed": 1}
 
 def setup():
-    print("Use arrow keys to move the sprite around the screen.")
+    print("Use WASD keys to move the sprite around the screen.")
     global player
     # Already initialized above
 
