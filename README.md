@@ -12,7 +12,7 @@ Designed and maintained by [glkdrlgkrlzflnjkgh](https://github.com/glkdrlgkrlzfl
 ## 🚀 Features
 
 - 🕹️ Sprite rendering with a 16-color palette  
-- 🎮 Input mapping for arrow keys + A/B buttons  
+- 🎮 Input mapping for arrow keys + A/B + START/SELECT buttons  
 - 🧠 Secure sandbox with safe globals and built-in guards  
 - 📦 Cartridge system with `setup()` and `update()` hooks  
 - 🧵 Threading support via a custom `Thread` wrapper  
