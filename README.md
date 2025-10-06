@@ -1,6 +1,6 @@
-Thanks for the correction, Callum! Here's your updated `README.md` with the correct GitHub username:
 
----
+
+
 
 # 🎮 CallumConsole
 
