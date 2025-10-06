@@ -1,3 +1,4 @@
+$
 player = {"x": 60, "y": 60, "speed": 1}
 
 def setup():
@@ -8,10 +9,9 @@ def setup():
 def update():
     global player
     input = get_input()
-
-    if input['a']:
+    if input['start']:
         print("Exiting...")
-        quit()
+        exit_game()
     if input["left"]:
         player["x"] = player["x"] - player["speed"]
     if input["right"]:
@@ -23,8 +23,8 @@ def update():
 
     sprite = [
         [0,0,0,0,0,0,0,0],
-        [0,2,2,2,2,2,2,1],
-        [0,2,3,3,3,3,2,1],
+        [0,2,2,2,2,2,2,0],
+        [0,2,3,3,3,3,2,0],
         [0,2,3,1,1,3,2,0],
         [0,2,3,1,1,3,2,0],
         [0,2,3,3,3,3,2,0],

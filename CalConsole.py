@@ -94,10 +94,21 @@ def draw_custom_sprite(surface, sprite, x, y):
             color_index = sprite[row][col]
             if 0 <= color_index < len(PALETTE):
                 pygame.draw.rect(surface, PALETTE[color_index], (x + col, y + row, 1, 1))
-
+def extract_metadata(code):
+    metadata = {}
+    for line in code.splitlines():
+        if line.strip().startswith("# $"):
+            try:
+                tag, value = line[3:].split(":", 1)
+                metadata[tag.strip()] = value.strip()
+            except ValueError:
+                continue
+    return metadata
 def load_cart(filename, api):
     with open(filename, "r") as f:
         code = f.read()
+        for meta in extract_metadata(code):
+            print(f"[CART META DATA]  - {meta}: {extract_metadata(code)[meta]}")
     try:
         compiled = compile_restricted(code, filename=filename, mode='exec')
     except SyntaxError as e:
@@ -132,8 +143,8 @@ def main():
             "down": keys[pygame.K_s],
             "a": keys[pygame.K_z],
             "b": keys[pygame.K_x],
-            "start": keys[pygame.K_RETURN],
-            "select": keys[pygame.K_TAB]
+            "start": keys[pygame.K_f],
+            "select": keys[pygame.K_g]
         }
     def api_exit():
         global QUIT_REQUESTED
@@ -160,7 +171,7 @@ def main():
     safe_api["draw_custom_sprite"] = api_draw_custom_sprite
     safe_api["get_input"] = api_get_input
     safe_api["_write_"] = lambda x:x
-    safe_api["quit"] = api_exit
+    safe_api["exit_game"] = api_exit
     safe_api["_getiter_"] = _getiter_
     for name, mod in SAFE_MODULES.items():
         print(f"adding {name} to allowed modules!")
