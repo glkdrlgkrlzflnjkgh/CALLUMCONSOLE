@@ -34,6 +34,7 @@ Cartridges can use these built-in functions:
 | `Thread(target)` | Runs a function in a background thread (sandboxed) |
 | `print()` | Captured and displayed as `[CART OUTPUT]` in the console |
 
+
 ---
 
 ## 📂 Cartridge Format
